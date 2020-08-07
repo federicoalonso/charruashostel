@@ -10,6 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @include('admin.partials.estilosGen')
 
     @stack('styles')
+    <title>Charruas Hostel | Escritorio</title>
 </head>
 
 <body class="hold-transition sidebar-mini text-sm">
@@ -214,6 +215,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/adminlte/js/adminlte.min.js"></script>
+    <!-- App -->
+    <script src="{{ mix('js/app.js') }}"></script>
 
     @stack('scripts')
 
