@@ -27,7 +27,8 @@ Auth::routes();
 Route::group([
     //'prefix' => 'admin',
     //'namespace' => 'Admin',
-    //'middleware' => 'auth'
+    'middleware' => 'auth'
 ], function(){
     Route::get('/escritorio', 'HomeController@index')->name('admin.index');
+    Route::post('/categorias', 'CategoriaController@store')->name('categorias.store');
 });
