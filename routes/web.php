@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return redirect('/home');
-});
+}); */
+Route::view('/', 'welcome');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
