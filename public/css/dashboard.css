@@ -153,6 +153,22 @@ body {
     max-height: 500px;
 }
 
+.wrapper .sidebar .sidebar-menu .separator{
+    margin: 15px 0;
+    position: relative;
+}
+
+.wrapper .sidebar .sidebar-menu .separator::before {
+    content: "";
+    position: absolute;
+    left: calc(100% - 90%);
+    bottom: 0;
+    width: 80%;
+    opacity: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.705);
+}
+
 .wrapper .main-container{
     width: calc(100% - 250px);
     margin-left: 250px;

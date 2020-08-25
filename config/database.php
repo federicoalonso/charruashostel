@@ -91,6 +91,12 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'dusk-sqlite' => [
+            'driver' => 'sqlite',
+            'database' => database_path('database.sqlite'), // env() in sqlite option was using .env value
+            'prefix' => '',
+        ],
+
     ],
 
     /*

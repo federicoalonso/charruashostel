@@ -10,7 +10,7 @@
 
 <body>
     <div class="login-reg-panel">
-        <div class="register-info-box" style="">
+        <div class="register-info-box">
             <h2>Charruas Hostel</h2>
             <p>Administración del Hostel</p>
         </div>
@@ -20,8 +20,18 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <input type="email" placeholder="Email" name="email" value="{{ old('email') }}" class="@error('email') is-invalid @enderror">
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <input type="password" placeholder="Password" name="password" class="@error('password') is-invalid @enderror">
-                    <input type="submit" value="Login">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    <input type="submit" value="Login" id="login-btn">
                     <a href="{{ route('password.request') }}">¿Olvidó su contraseña?</a>
                 </form>
             </div>

@@ -24,6 +24,7 @@ class UsuarioPuedeCrearCategoriaTest extends DuskTestCase
                     ->visit('/')
                     ->type('nombre', 'categoria 1')
                     ->press('#btn-guardar')
+                    ->waitForText('Categoria 1')
                     ->assertSee('Categoria 1')
                 ;
         });

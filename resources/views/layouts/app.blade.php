@@ -74,6 +74,18 @@
                         <a href="#"><i class="fas fa-cogs"></i><span>Configuración</span></a>
                     </div>
                 </li>
+                <li class="separator"></li>
+                <li class="item">
+                    <a href="{{ route('logout') }}" class="menu-btn salirAlerta">
+                        <i class="nav-icon fas fa-power-off"></i>
+                        <span>
+                            Cerrar Sesión
+                        </span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
             </div>
         </div>
 
@@ -100,12 +112,34 @@
     <!-- overScroll Bars -->
     <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <script src="/plugins/overlayScrollbars/js/OverlayScrollbars.min.js"></script>
-    
+
+    <script src="/plugins/sweetAlert/sweetalert2.all.min.js"></script>
+    @include('sweetalert::alert')
+
     <!-- Script Página -->
     <script>
-        $(document).ready(function(){
-            $('.nav-link').click(function(){
+        $(document).ready(function() {
+            $('.nav-link').click(function() {
                 $('.wrapper').toggleClass('colapsado');
+            });
+
+            $(".salirAlerta").click(function(event) {
+                event.preventDefault();
+
+                Swal.fire({
+                    title: 'Está seguro?',
+                    text: "Seguro quiere abandonar la sesión?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: 'grey',
+                    confirmButtonText: 'Sí, finalizar!',
+                    cancelButtonText: 'Cancelar'
+                }).then(function(result) {
+                    if (result.value) {
+                        document.getElementById('logout-form').submit();
+                    }
+                })
             });
         });
     </script>
