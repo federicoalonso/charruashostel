@@ -3,9 +3,9 @@ body{
   font-family: 'Mukta', sans-serif;
 	height:100vh;
 	min-height:550px;
-	background-image:linear-gradient(225deg, rgb(66, 132, 255), transparent, rgb(255, 136, 24)), url(/img/fondoLogin.jpg);
+	background-image:linear-gradient(225deg, rgb(0, 45, 129), rgb(158, 76, 0)), url(/img/fondoLogin.png);
     background-repeat: no-repeat;
-    background-blend-mode: soft-light;
+    background-blend-mode: multiply;
 	background-size:cover;
 	background-position:center;
 	position:relative;

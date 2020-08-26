@@ -22,7 +22,6 @@ Route::view('/', 'welcome')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('fallos', 'FallosController@store')->name('fallos.store');
-
 Auth::routes();
 
 Route::group([
@@ -31,5 +30,6 @@ Route::group([
     'middleware' => 'auth'
 ], function(){
     Route::get('/escritorio', 'HomeController@index')->name('admin.index');
+    Route::get('/categorias', 'CategoriaController@index')->name('categorias.index');
     Route::post('/categorias', 'CategoriaController@store')->name('categorias.store');
 });

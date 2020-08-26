@@ -15,7 +15,6 @@
         <input type="submit" id="btn-guardar" value="Publicar" class="btn btn-success" />
       </div>
     </form>
-    <div v-for="categoria in categorias" v-text="categoria.nombre"></div>
   </div>
 </template>
 
@@ -24,7 +23,6 @@ export default {
   data() {
     return {
       nombre: "",
-      categorias: [],
     };
   },
   methods: {
@@ -33,7 +31,7 @@ export default {
         .post("/categorias", { nombre: this.nombre })
         .then((res) => {
           this.nombre = '';
-          this.categorias.push(res.data);
+          EventBus.$emit('categoria-creada', res.data);
         })
         .catch((err) => {
           console.log(err.response.data);

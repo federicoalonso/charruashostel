@@ -22,11 +22,11 @@
     <!-- Dashboard -->
     <link href="/css/dashboard.css" rel="stylesheet">
 
-    <!-- overScroll Bars -->
-    <link href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 </head>
 
 <body>
@@ -93,7 +93,7 @@
         <!-- ***************************************
                         Contenedor Principal
         **************************************** -->
-        <main class="py-4 main-container">
+        <main class="main-container">
             @yield('content')
             <footer class="footer mt-5">
                 <strong>Copyright © 2020 <a href="http://kpacite.com">Kpacite.com</a>.</strong>
@@ -109,12 +109,12 @@
     <!-- JQuery -->
     <script src="/plugins/jquery/jquery.min.js"></script>
 
-    <!-- overScroll Bars -->
-    <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <script src="/plugins/overlayScrollbars/js/OverlayScrollbars.min.js"></script>
-
+    <!-- sweetAlert -->
     <script src="/plugins/sweetAlert/sweetalert2.all.min.js"></script>
-    @include('sweetalert::alert')
+
+    <!-- DataTables -->
+    <script src="/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
     <!-- Script Página -->
     <script>
@@ -140,6 +140,35 @@
                         document.getElementById('logout-form').submit();
                     }
                 })
+            });
+
+            var table = $('.data-table-js').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
             });
         });
     </script>

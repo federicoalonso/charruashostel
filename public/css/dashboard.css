@@ -17,7 +17,8 @@ body {
     /* background-color: #024959; */
     width: 250px;
     position: fixed;
-    min-height: 100vh;
+    overflow: hidden;
+    height: 100vh;
     transition: 0.5s;
     top: 0;
     color: white;
@@ -40,7 +41,7 @@ body {
     font-size: 25px;
     color: #f24c27;
     text-transform: capitalize;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .wrapper .sidebar .marca.marca-sm{
@@ -55,7 +56,8 @@ body {
 }
 
 .wrapper .sidebar .sidebar-menu {
-    overflow: hidden;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 .wrapper .sidebar .sidebar-menu .profile img {
@@ -71,7 +73,7 @@ body {
 
 .wrapper .sidebar .sidebar-menu .item{
     width: 250px;
-    overflow: hidden;
+    overflow-x: hidden;
     transition: 0.5s;
 }
 
@@ -111,7 +113,7 @@ body {
 
 .wrapper .sidebar .sidebar-menu .item .sub-menu{
     background: #00252e80;
-    overflow: hidden;
+    overflow-x: hidden;
     max-height: 0;
     transition: 0.5s;
 }
@@ -169,12 +171,17 @@ body {
     background: rgba(255, 255, 255, 0.705);
 }
 
+.salirAlerta{
+    margin-bottom: 60px;
+}
+
 .wrapper .main-container{
     width: calc(100% - 250px);
     margin-left: 250px;
     min-height: calc(100vh - 55px);
     position: relative;
     transition: 0.5s;
+    padding-bottom: 70px;
 }
 
 .footer{
@@ -213,4 +220,18 @@ body {
 .wrapper.colapsado .main-container{
     margin-left: 55px;
     width: calc(100% - 55px);
+}
+
+::-webkit-scrollbar{
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: linear-gradient(transparent, rgb(0, 172, 149));
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    cursor: pointer;
+    background: linear-gradient(transparent, rgb(110, 0, 201));
 }

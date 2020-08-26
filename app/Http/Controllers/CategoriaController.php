@@ -8,6 +8,10 @@ use App\Http\Requests\StoreCategoriaRequest;
 
 class CategoriaController extends Controller
 {
+    public function index(){
+        return Categoria::latest()->paginate();
+    }
+
     public function store(StoreCategoriaRequest $request){
 
         $categoria = Categoria::create([
