@@ -25,9 +25,9 @@ window.EventBus = new Vue();
 
 Vue.component('categorias-form', require('./components/CategoriasForm.vue').default);
 Vue.component('categorias-list', require('./components/CategoriasList.vue').default);
-Vue.component('data-table', require('./components/Datatable.vue').default);
-Vue.component('pagination-table', require('./components/PaginationTable.vue').default);
-Vue.component('table-row', require('./components/TableRow.vue').default);
+Vue.component('data-table', require('./components/dataTables/Datatable.vue').default);
+Vue.component('pagination-table', require('./components/dataTables/PaginationTable.vue').default);
+Vue.component('table-row', require('./components/dataTables/TableRow.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
