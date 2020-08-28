@@ -12,9 +12,16 @@ class CategoriaController extends Controller
     public function index(Request $request)
     {
         $busqueda = $request->search;
+        ($request->dir) ? : $request->dir = 'desc';
+        ($request->column) ? : $request->column = 'id';
+        ($request->length) ? : $request->length = '10';
         $categorias = DB::table('categorias')
                     ->orderBy($request->column, $request->dir)
-                    ->where('nombre', 'LIKE', '%' . $busqueda . '%')
+                    ->where(function ($query) use ($busqueda) {
+                        if ($busqueda) {
+                            $query->where('nombre', 'LIKE', '%' . $busqueda . '%');
+                        }
+                    })
                     ->orWhere(function ($query) use ($busqueda) {
                         if (intval($busqueda) > 0) {
                             $query->where('id', 'LIKE', '%' . $busqueda . '%');

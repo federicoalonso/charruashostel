@@ -33,3 +33,7 @@ Route::group([
     Route::get('/categorias', 'CategoriaController@index')->name('categorias.index');
     Route::post('/categorias', 'CategoriaController@store')->name('categorias.store');
 });
+
+//Aliases para pruebas en consola
+// doskey pu="vendor/bin/phpunit"
+// doskey du=php artisan dusk

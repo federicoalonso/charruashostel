@@ -21,15 +21,14 @@
             <option value="50">50</option>
             <option value="60">60</option>
             <option value="70">70</option>
+            <option value="80">80</option>
+            <option value="90">90</option>
+            <option value="100">100</option>
           </select>
         </div>
         <data-table :columns="columns" :sortKey="sortKey" :sortOrders="sortOrders" @sort="sortBy">
           <tbody>
-            <tr v-for="categoria in categorias" :key="categoria.id">
-              <td>{{ categoria.id }}</td>
-              <td>{{ categoria.nombre }}</td>
-              <td>{{ categoria.user_id }}</td>
-            </tr>
+            <table-row v-for="categoria in categorias" :key="categoria.id" :categoria="categoria"></table-row>
           </tbody>
         </data-table>
         <pagination-table :pagination="pagination" @prev="lessOne" @next="plusOne"></pagination-table>
@@ -41,15 +40,17 @@
 <script>
 import Datatable from "./Datatable.vue";
 import PaginationTable from "./PaginationTable.vue";
+import TableRow from "./TableRow.vue";
 
 export default {
   components: { datatable: Datatable, paginationTable: PaginationTable },
   data() {
     let sortOrders = {};
     let columns = [
-      { width: "33%", label: "#", name: "id" },
-      { width: "33%", label: "Nombre", name: "nombre" },
-      { width: "33%", label: "#Usuario", name: "user_id" },
+      { width: "15%", label: "#", name: "id" },
+      { width: "35%", label: "Nombre", name: "nombre" },
+      { width: "25%", label: "#Usuario", name: "user_id" },
+      { width: "25%", label: "Aciones", name: "accion" },
     ];
     columns.forEach((column) => {
       sortOrders[column.name] = -1;
