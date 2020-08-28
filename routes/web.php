@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 /* Route::get('/', function () {
     return redirect('/home');
 }); */
-Route::view('/', 'welcome')->middleware('auth');
+Route::view('/', 'spa')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

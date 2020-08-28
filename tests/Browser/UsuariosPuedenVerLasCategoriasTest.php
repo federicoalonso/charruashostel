@@ -24,6 +24,7 @@ class UsuariosPuedenVerLasCategoriasTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user, $categorias) {
             $browser->loginAs($user)
                     ->visit('/')
+                    ->press('#productos')
                     ->waitForText($categorias->first()->nombre)
                     ->assertSee($categorias->first()->nombre)
                     ;

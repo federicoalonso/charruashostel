@@ -22,6 +22,7 @@ class UsuarioPuedeCrearCategoriaTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                     ->visit('/')
+                    ->press('#productos')
                     ->type('nombre', 'categoria 1')
                     ->press('#btn-guardar')
                     ->waitForText('Categoria 1')

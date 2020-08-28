@@ -94,6 +94,7 @@
                         Contenedor Principal
         **************************************** -->
         <main class="main-container">
+            <router-view></router-view>
             @yield('content')
             <footer class="footer mt-5">
                 <strong>Copyright © 2020 <a href="http://kpacite.com">Kpacite.com</a>.</strong>

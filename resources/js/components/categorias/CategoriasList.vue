@@ -38,9 +38,9 @@
 </template>
 
 <script>
-import Datatable from "./dataTables/Datatable.vue";
-import PaginationTable from "./dataTables/PaginationTable.vue";
-import TableRow from "./dataTables/TableRow.vue";
+import Datatable from "../dataTables/Datatable.vue";
+import PaginationTable from "../dataTables/PaginationTable.vue";
+import TableRow from "../dataTables/TableRow.vue";
 
 export default {
   components: { datatable: Datatable, paginationTable: PaginationTable },
