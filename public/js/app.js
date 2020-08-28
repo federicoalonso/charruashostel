@@ -1961,6 +1961,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Datatable_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Datatable.vue */ "./resources/js/components/Datatable.vue");
+/* harmony import */ var _PaginationTable_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaginationTable.vue */ "./resources/js/components/PaginationTable.vue");
 //
 //
 //
@@ -1975,25 +1977,145 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    datatable: _Datatable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    paginationTable: _PaginationTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
+    var sortOrders = {};
+    var columns = [{
+      width: "33%",
+      label: "#",
+      name: "id"
+    }, {
+      width: "33%",
+      label: "Nombre",
+      name: "nombre"
+    }, {
+      width: "33%",
+      label: "#Usuario",
+      name: "user_id"
+    }];
+    columns.forEach(function (column) {
+      sortOrders[column.name] = -1;
+    });
     return {
-      categorias: []
+      categorias: [],
+      columns: columns,
+      sortKey: "id",
+      sortOrders: sortOrders,
+      tablesData: {
+        page: 1,
+        draw: 0,
+        length: 10,
+        column: "id",
+        search: "",
+        dir: "desc"
+      },
+      pagination: {
+        lastPage: "",
+        currentPage: "",
+        total: "",
+        lastPageUrl: "",
+        nextPageUrl: "",
+        prevPageUrl: "",
+        from: "",
+        to: ""
+      }
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get("/categorias").then(function (res) {
-      _this.categorias = res.data.data;
-    })["catch"](function (err) {
-      console.log(err);
-    });
+    this.getCategorias();
     EventBus.$on("categoria-creada", function (categoria) {
       _this.categorias.unshift(categoria);
     });
   },
-  methods: {}
+  methods: {
+    getCategorias: function getCategorias() {
+      var _this2 = this;
+
+      var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/categorias";
+      this.tablesData.draw++;
+      axios.get(url, {
+        params: this.tablesData
+      }).then(function (res) {
+        var data = res.data;
+
+        if (_this2.tablesData.draw == data.draw) {
+          _this2.categorias = data.data.data;
+
+          _this2.configPagination(data.data);
+        }
+
+        _this2.categorias = res.data.data;
+
+        _this2.configPagination(res.data);
+        /* console.log(res.data); */
+
+      })["catch"](function (err) {
+        console.log(err);
+      });
+      EventBus.$on("categoria-creada", function (categoria) {
+        _this2.getCategorias();
+      });
+    },
+    configPagination: function configPagination(data) {
+      this.pagination.lastPage = data.last_page;
+      this.pagination.currentPage = data.path;
+      this.pagination.total = data.total;
+      this.pagination.lastPageUrl = data.last_page_url;
+      this.pagination.nextPageUrl = data.next_page_url;
+      this.pagination.prevPageUrl = data.prev_page_url;
+      this.pagination.from = data.from;
+      this.pagination.to = data.to;
+    },
+    sortBy: function sortBy(key) {
+      this.sortKey = key;
+      this.sortOrders[key] = this.sortOrders[key] * -1;
+      this.tablesData.column = key;
+      this.tablesData.dir = this.sortOrders[key] === 1 ? "asc" : "desc";
+      this.getCategorias();
+    },
+    plusOne: function plusOne() {
+      this.tablesData.page++;
+      this.getCategorias();
+    },
+    lessOne: function lessOne() {
+      this.tablesData.page--;
+      this.getCategorias();
+    }
+  }
 });
 
 /***/ }),
@@ -38396,34 +38518,136 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-12" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "card border-0 mt-4" },
-      _vm._l(_vm.categorias, function(categoria) {
-        return _c("div", {
-          domProps: { textContent: _vm._s(categoria.nombre) }
-        })
-      }),
-      0
-    )
+    _c("div", { staticClass: "card border-0" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("Tabla")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.tablesData.search,
+                  expression: "tablesData.search"
+                }
+              ],
+              staticClass: "form-control col-8 d-inline-block",
+              attrs: { type: "text", placeholder: "Buscar" },
+              domProps: { value: _vm.tablesData.search },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.tablesData, "search", $event.target.value)
+                  },
+                  function($event) {
+                    return _vm.getCategorias()
+                  }
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.tablesData.length,
+                    expression: "tablesData.length"
+                  }
+                ],
+                staticClass: "form-control col-3 d-inline-block",
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.tablesData,
+                        "length",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                    function($event) {
+                      return _vm.getCategorias()
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "10", selected: "" } }, [
+                  _vm._v("10")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "30" } }, [_vm._v("30")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "40" } }, [_vm._v("40")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "50" } }, [_vm._v("50")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "60" } }, [_vm._v("60")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "70" } }, [_vm._v("70")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "data-table",
+            {
+              attrs: {
+                columns: _vm.columns,
+                sortKey: _vm.sortKey,
+                sortOrders: _vm.sortOrders
+              },
+              on: { sort: _vm.sortBy }
+            },
+            [
+              _c(
+                "tbody",
+                _vm._l(_vm.categorias, function(categoria) {
+                  return _c("tr", { key: categoria.id }, [
+                    _c("td", [_vm._v(_vm._s(categoria.id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(categoria.nombre))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(categoria.user_id))])
+                  ])
+                }),
+                0
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("pagination-table", {
+            attrs: { pagination: _vm.pagination },
+            on: { prev: _vm.lessOne, next: _vm.plusOne }
+          })
+        ],
+        1
+      )
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card border-0" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _vm._v("\n      Tabla\n    ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38519,7 +38743,7 @@ var render = function() {
       ? _c(
           "a",
           {
-            staticClass: "button is-small pagination-previous",
+            staticClass: "btn btn-sm",
             on: {
               click: function($event) {
                 return _vm.$emit("prev")
@@ -38528,20 +38752,15 @@ var render = function() {
           },
           [_vm._v("Prev")]
         )
-      : _c(
-          "a",
-          {
-            staticClass: "button is-small pagination-previous",
-            attrs: { disabled: true }
-          },
-          [_vm._v("Prev")]
-        ),
+      : _c("a", { staticClass: "btn btn-sm", attrs: { disabled: true } }, [
+          _vm._v("Prev")
+        ]),
     _vm._v(" "),
     _vm.pagination.nextPageUrl
       ? _c(
           "a",
           {
-            staticClass: "button is-small pagination-next",
+            staticClass: "btn btn-sm",
             on: {
               click: function($event) {
                 return _vm.$emit("next")
@@ -38550,14 +38769,9 @@ var render = function() {
           },
           [_vm._v("Next")]
         )
-      : _c(
-          "a",
-          {
-            staticClass: "button is-small pagination-next",
-            attrs: { disabled: true }
-          },
-          [_vm._v("Next")]
-        )
+      : _c("a", { staticClass: "btn btn-smt", attrs: { disabled: true } }, [
+          _vm._v("Next")
+        ])
   ])
 }
 var staticRenderFns = []

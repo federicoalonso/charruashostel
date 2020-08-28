@@ -232,6 +232,6 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover{
-    cursor: pointer;
+    cursor: pointer !important;
     background: linear-gradient(transparent, rgb(110, 0, 201));
 }

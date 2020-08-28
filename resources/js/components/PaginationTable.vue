@@ -15,17 +15,17 @@
     <span class="page-stats">{{ pagination.from }} - {{ pagination.to }} of {{ pagination.total }}</span>
     <a
       v-if="pagination.prevPageUrl"
-      class="button is-small pagination-previous"
+      class="btn btn-sm"
       @click="$emit('prev');"
     >Prev</a>
-    <a v-else class="button is-small pagination-previous" :disabled="true">Prev</a>
+    <a v-else class="btn btn-sm" :disabled="true">Prev</a>
 
     <a
       v-if="pagination.nextPageUrl"
-      class="button is-small pagination-next"
+      class="btn btn-sm"
       @click="$emit('next');"
     >Next</a>
-    <a v-else class="button is-small pagination-next" :disabled="true">Next</a>
+    <a v-else class="btn btn-smt" :disabled="true">Next</a>
   </nav>
 </template>
 <script>

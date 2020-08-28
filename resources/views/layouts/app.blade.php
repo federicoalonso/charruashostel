@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
 
     <!-- DataTables -->
-    <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+    <!-- <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.css"> -->
 </head>
 
 <body>
@@ -113,8 +113,8 @@
     <script src="/plugins/sweetAlert/sweetalert2.all.min.js"></script>
 
     <!-- DataTables -->
-    <script src="/plugins/datatables/jquery.dataTables.js"></script>
-    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <!-- <script src="/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script> -->
 
     <!-- Script Página -->
     <script>
@@ -142,7 +142,7 @@
                 })
             });
 
-            var table = $('.data-table-js').DataTable({
+            /* var table = $('.data-table-js').DataTable({
                 "paging": true,
                 "lengthChange": true,
                 "searching": true,
@@ -169,7 +169,7 @@
                         "previous": "Anterior"
                     }
                 },
-            });
+            }); */
         });
     </script>
 </body>
