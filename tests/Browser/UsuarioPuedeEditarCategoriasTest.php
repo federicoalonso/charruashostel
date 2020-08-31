@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class UsuariosPuedenVerLasCategoriasTest extends DuskTestCase
+class UsuarioPuedeEditarCategoriasTest extends DuskTestCase
 {
     use DatabaseMigrations;
     /**
@@ -16,11 +16,11 @@ class UsuariosPuedenVerLasCategoriasTest extends DuskTestCase
      *
      * @test
      */
-    public function usuarios_pueden_ver_lista_de_categorias()
+    public function un_usuario_puede_editar_categorias()
     {
         $categorias = factory(Categoria::class, 5)->create();
         $user = factory(User::class)->create();
-        $categorias = factory(Categoria::class)->create(['user_id' => $user->id]);
+        $categorias = factory(Categoria::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $categorias) {
             $browser->loginAs($user)
@@ -29,8 +29,12 @@ class UsuariosPuedenVerLasCategoriasTest extends DuskTestCase
                     ->waitForText('Configuración')
                     ->press('#productos-categoria')
                     ->waitForText($categorias->first()->nombre)
-                    ->assertSee($categorias->first()->nombre)
-                    ->assertSee($user->name)
+                    ->press('@categoria-1')
+                    ->waitForText("Editar Categoría")
+                    ->type('#nombre', 'otroNombre')
+                    ->press('#guardar')
+                    ->waitForText("Otronombre")
+                    ->assertSee("Otronombre")
                     ;
         });
     }

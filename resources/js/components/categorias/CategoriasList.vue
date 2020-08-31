@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="card border-0">
       <div class="card-header">Tabla</div>
-      <div class="card-body">
+      <div class="card-body alerta">
         <div class="form-group">
           <input
             class="form-control col-8 d-inline-block"
@@ -10,10 +10,15 @@
             v-model="tablesData.search"
             placeholder="Buscar"
             @input="getCategorias()"
-          /><!-- 
+          />
+          <!-- 
         </div>
-        <div class="form-group"> -->
-          <select class="form-control col-3 d-inline-block" v-model="tablesData.length" @change="getCategorias()">
+          <div class="form-group">-->
+          <select
+            class="form-control col-3 d-inline-block"
+            v-model="tablesData.length"
+            @change="getCategorias()"
+          >
             <option value="10" selected>10</option>
             <option value="20">20</option>
             <option value="30">30</option>
@@ -27,11 +32,19 @@
           </select>
         </div>
         <data-table :columns="columns" :sortKey="sortKey" :sortOrders="sortOrders" @sort="sortBy">
-          <tbody>
+          <tbody v-if="categorias">
             <table-row v-for="categoria in categorias" :key="categoria.id" :categoria="categoria"></table-row>
+          </tbody>
+          <tbody v-else>
+            <tr>
+              <td :colspan="columns.length" class="text-center">---- No existen elementos. ----</td>
+            </tr>
+            <!-- <tr class="text-center">No existen elementos.</tr> -->
           </tbody>
         </data-table>
         <pagination-table :pagination="pagination" @prev="lessOne" @next="plusOne"></pagination-table>
+
+        <modal-form :categorias="categorias"></modal-form>
       </div>
     </div>
   </div>
@@ -49,13 +62,14 @@ export default {
     let columns = [
       { width: "15%", label: "#", name: "id" },
       { width: "35%", label: "Nombre", name: "nombre" },
-      { width: "25%", label: "#Usuario", name: "user_id" },
+      { width: "25%", label: "#Usuario", name: "autor" },
       { width: "25%", label: "Aciones", name: "accion" },
     ];
     columns.forEach((column) => {
       sortOrders[column.name] = -1;
     });
     return {
+      eliminando: false,
       categorias: [],
       columns: columns,
       sortKey: "id",
@@ -78,12 +92,23 @@ export default {
         from: "",
         to: "",
       },
+      categoriaEdit: null,
     };
   },
   mounted() {
     this.getCategorias();
     EventBus.$on("categoria-creada", (categoria) => {
       this.categorias.unshift(categoria);
+    });
+    EventBus.$on("categoria-deleted", () => {
+      this.eliminando = true;
+      this.getCategorias();
+    });
+    $("#exampleModal").on("show.bs.modal", function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var recipient = button.data("id"); // Extract info from data-* attributes
+
+      EventBus.$emit("categoria-para-editar", recipient);
     });
   },
   methods: {
@@ -92,13 +117,22 @@ export default {
       axios
         .get(url, { params: this.tablesData })
         .then((res) => {
-          let data = res.data;
+          /* let data = res.data;
+          console.log(res);
           if (this.tablesData.draw == data.draw) {
-            this.categorias = data.data.data;
-            this.configPagination(data.data);
-          }
+            console.log('sss');
+            this.categorias = res.data.data;
+            this.configPagination(res.data);
+          } */
           this.categorias = res.data.data;
           this.configPagination(res.data);
+          for(var i=0; i<this.categorias.length; i++){
+            this.categorias[i].updated = true;
+          }
+          if(this.eliminando){
+            this.eliminando = false;
+            $('.alerta').append('Categoría Eliminada');
+          }
           /* console.log(res.data); */
         })
         .catch((err) => {

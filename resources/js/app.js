@@ -27,6 +27,11 @@ Vue.component('pagination-table', require('./components/dataTables/PaginationTab
 Vue.component('table-row', require('./components/dataTables/TableRow.vue').default);
 Vue.component('menu-superior', require('./components/layouts/MenuSuperior.vue').default);
 Vue.component('sidebar-menu', require('./components/layouts/SidebarMenu.vue').default);
+Vue.component('modal-form', require('./components/modals/ModalForm.vue').default);
+
+import auth from './mixins/auth';
+
+Vue.mixin(auth);
 
 const app = new Vue({
     el: '#app',

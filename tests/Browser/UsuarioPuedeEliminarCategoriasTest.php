@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class UsuariosPuedenVerLasCategoriasTest extends DuskTestCase
+class UsuarioPuedeEliminarCategoriasTest extends DuskTestCase
 {
     use DatabaseMigrations;
     /**
@@ -16,21 +16,23 @@ class UsuariosPuedenVerLasCategoriasTest extends DuskTestCase
      *
      * @test
      */
-    public function usuarios_pueden_ver_lista_de_categorias()
+    public function un_usuario_puede_eliminar_categorias()
     {
         $categorias = factory(Categoria::class, 5)->create();
         $user = factory(User::class)->create();
-        $categorias = factory(Categoria::class)->create(['user_id' => $user->id]);
+        $categorias = factory(Categoria::class)->create();
+        $cat = $categorias->first();
 
-        $this->browse(function (Browser $browser) use ($user, $categorias) {
+        $this->browse(function (Browser $browser) use ($user, $cat) {
             $browser->loginAs($user)
                     ->visit('/')
                     ->press('#productos')
                     ->waitForText('Configuración')
                     ->press('#productos-categoria')
-                    ->waitForText($categorias->first()->nombre)
-                    ->assertSee($categorias->first()->nombre)
-                    ->assertSee($user->name)
+                    ->waitForText($cat->nombre)
+                    ->press('@categoria-del-'.$cat->id)
+                    ->waitForText("Categoría Eliminada")
+                    ->assertDontSee($cat->nombre)
                     ;
         });
     }

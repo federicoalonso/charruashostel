@@ -49,6 +49,31 @@ class ListaDeCategoriasTest extends TestCase
     /**
      * @test
      */
+    public function un_usuario_autenticado_puede_ver_el_autor_de_la_categoria()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
+
+        $categoria = factory(Categoria::class)->create(['user_id'=>$user->id]);
+
+        $response = $this->getJson(route('categorias.index'));
+
+        $response->assertSuccessful();
+
+        $response->assertJsonStructure([
+            'data', 'total', 'first_page_url'
+        ]);
+        
+        $this->assertEquals(
+            $user->name,
+            $response->json('data.0.autor')
+        );
+    }
+    /**
+     * @test
+     */
     /* public function un_guest_no_puede_ver_las_categorias()
     {
         $this->withoutExceptionHandling();
@@ -58,7 +83,7 @@ class ListaDeCategoriasTest extends TestCase
         $categoria3 = factory(Categoria::class)->create(['created_at' => now()->subDays(2)]);
         $categoria4 = factory(Categoria::class)->create(['created_at' => now()->subDays(1)]);
 
-        $this->getJson(route('categorias.index'))->expectException('Illuminate\Auth\AuthenticationException');
+        $this->getJson(route('categorias.index'))->assertRedirect('/login');
 
     } */
 }

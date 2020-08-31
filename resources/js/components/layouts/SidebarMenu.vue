@@ -10,7 +10,7 @@
     <div class="sidebar-menu">
       <center class="profile">
         <img src="/img/AvatarIndio.png" alt />
-        <p>Admin</p>
+        <p v-text="actualUser.name"></p>
       </center>
       <li class="item">
         <router-link class="menu-btn" :to="{name: 'home'}">
@@ -35,7 +35,7 @@
             <i class="fa fa-list-ul"></i>
             <span>Resumen</span>
           </a>
-          <router-link :to="{name: 'productos.configuracion'}">
+          <router-link :to="{name: 'productos.configuracion'}" id="productos-categoria">
             <i class="fas fa-cogs"></i>
             <span>Configuración</span>
           </router-link>
@@ -63,5 +63,6 @@
 </template>
 
 <script>
-export default {};
+export default {
+};
 </script>

@@ -12,20 +12,20 @@
 </style>
 <template>
   <nav class="pagination">
-    <span class="page-stats">{{ pagination.from }} - {{ pagination.to }} of {{ pagination.total }}</span>
+    <span class="page-stats ml-1">{{ pagination.from }} - {{ pagination.to }} de {{ pagination.total }}</span>
     <a
       v-if="pagination.prevPageUrl"
-      class="btn btn-sm"
+      class="btn btn-sm btn-outline-info ml-1"
       @click="$emit('prev');"
-    >Prev</a>
-    <a v-else class="btn btn-sm" :disabled="true">Prev</a>
+    >Anterior</a>
+    <a v-else class="btn btn-sm btn-outline-info ml-1" :disabled="true">Anterior</a>
 
     <a
       v-if="pagination.nextPageUrl"
-      class="btn btn-sm"
+      class="btn btn-sm btn-outline-info ml-1"
       @click="$emit('next');"
-    >Next</a>
-    <a v-else class="btn btn-smt" :disabled="true">Next</a>
+    >Siguiente</a>
+    <a v-else class="btn btn-sm btn-outline-info ml-1" :disabled="true">Siguiente</a>
   </nav>
 </template>
 <script>
