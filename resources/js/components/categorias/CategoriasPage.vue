@@ -20,6 +20,7 @@
         <b>Versión</b> 1.0.0
       </div>
     </footer>
+    <toast-alert></toast-alert>
   </main>
 </template>
 <script>
