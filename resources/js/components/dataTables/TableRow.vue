@@ -60,7 +60,7 @@ export default {
       axios
         .delete("/categorias/" + this.categoria.id)
         .then((res) => {
-          EventBus.$emit("categoria-deleted");
+          EventBus.$emit("categoria-deleted", this.$props.categoria.id);
         })
         .catch((err) => {
           console.log(err.response.data);

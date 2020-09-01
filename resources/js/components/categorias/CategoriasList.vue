@@ -69,7 +69,7 @@ export default {
       sortOrders[column.name] = -1;
     });
     return {
-      eliminando: false,
+      //eliminando: false,
       categorias: [],
       columns: columns,
       sortKey: "id",
@@ -100,9 +100,8 @@ export default {
     EventBus.$on("categoria-creada", (categoria) => {
       this.categorias.unshift(categoria);
     });
-    EventBus.$on("categoria-deleted", () => {
-      this.eliminando = true;
-      this.getCategorias();
+    EventBus.$on("categoria-deleted", (id) => {
+      this.eliminarCategoria(id);
     });
     $("#exampleModal").on("show.bs.modal", function (event) {
       var button = $(event.relatedTarget); // Button that triggered the modal
@@ -112,6 +111,18 @@ export default {
     });
   },
   methods: {
+    eliminarCategoria(id) {
+      var flag = false;
+      var i = 0;
+      while (this.categorias.length > i && !flag) {
+        if (this.categorias[i].id == id) {
+          flag = true;
+          this.categorias.splice(i, 1);
+          return;
+        }
+        i++;
+      }
+    },
     getCategorias(url = "/categorias") {
       this.tablesData.draw++;
       axios
@@ -129,18 +140,18 @@ export default {
           for(var i=0; i<this.categorias.length; i++){
             this.categorias[i].updated = true;
           }
-          if(this.eliminando){
+          /* if(this.eliminando){
             this.eliminando = false;
             $('.alerta').append('Categoría Eliminada');
-          }
+          } */
           /* console.log(res.data); */
         })
         .catch((err) => {
           console.log(err);
         });
-      EventBus.$on("categoria-creada", (categoria) => {
+      /* EventBus.$on("categoria-creada", (categoria) => {
         this.getCategorias();
-      });
+      }); */
     },
     configPagination(data) {
       this.pagination.lastPage = data.last_page;

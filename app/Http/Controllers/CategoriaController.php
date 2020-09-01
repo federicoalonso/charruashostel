@@ -31,9 +31,10 @@ class CategoriaController extends Controller
         ]);
 
         return response()->json([
+            'id' => $categoria->id,
             'nombre' => $categoria->nombre,
-            'user_id' => $categoria->user_id,/* 
-            'autor_cat' => $categoria->autor_cat, */
+            'user_id' => $categoria->user_id,
+            'autor' => $categoria->user->name,
         ]);
     }
 

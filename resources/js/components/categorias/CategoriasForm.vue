@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       nombre: "",
-      nombreFeedback: '',
+      nombreFeedback: "",
     };
   },
   methods: {
@@ -55,13 +55,10 @@ export default {
           }
           if (err.response.data.errors.nombre) {
             this.nombreFeedback = err.response.data.errors.nombre.toString();
-          }/* 
+          } /* 
           console.log(err.response.data); */
         });
     },
   },
 };
 </script>
-
-<style scoped>
-</style>
