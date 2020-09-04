@@ -21,6 +21,8 @@
       </div>
     </footer>
     <toast-alert></toast-alert>
+    
+    <confirmation-alert></confirmation-alert>
   </main>
 </template>
 <script>

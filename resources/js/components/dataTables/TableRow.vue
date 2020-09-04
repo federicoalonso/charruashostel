@@ -57,14 +57,24 @@ export default {
   },
   methods: {
     eliminarCat(){
-      axios
+      var mensaje = {
+        titulo: "Eliminar Cat",
+        texto: "Seguro quiere eliminar?",
+        ruta: "/categorias/" + this.categoria.id,
+        metodo: "delete",
+        objeto: "categoria",
+        id: this.$props.categoria.id,
+      };
+      EventBus.$emit("confirm-alert-display", mensaje);
+      
+      /* axios
         .delete("/categorias/" + this.categoria.id)
         .then((res) => {
           EventBus.$emit("categoria-deleted", this.$props.categoria.id);
         })
         .catch((err) => {
           console.log(err.response.data);
-        });
+        }); */
     }
   },
   mounted() {
