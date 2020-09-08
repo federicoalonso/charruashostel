@@ -18,8 +18,8 @@ button {
 }
 </style>
 <template>
-  <transition-group name="table-row-transition" tag="tr" class="rowHover" v-bind:class="[this.updating ? 'sinGuardar' : '']">
-  <!-- <tr class="rowHover" v-bind:class="[this.updating ? 'sinGuardar' : '']"> -->
+  <!-- <transition-group name="table-row-transition" tag="tr" class="rowHover" v-bind:class="[this.updating ? 'sinGuardar' : '']"> -->
+  <tr class="rowHover" v-bind:class="[this.updating ? 'sinGuardar' : '']">
     <td>{{ categoria.id }}</td>
     <td>{{ categoria.nombre }}</td>
     <td>{{ categoria.autor }}</td>
@@ -49,8 +49,8 @@ button {
         </button>
       </div>
     </td>
-  <!-- </tr> -->
-  </transition-group>
+  </tr>
+  <!-- </transition-group> -->
 </template>
 <script>
 export default {

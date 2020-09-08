@@ -2410,6 +2410,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["categoria"],
   data: function data() {
@@ -7443,7 +7448,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "button {\n  width: 36px;\n}\n.rowHover {\n  transition: 0.3s;\n}\n.rowHover:hover {\n  cursor: pointer;\n  background: rgba(0, 195, 255, 0.151);\n}\n.sinGuardar {\n  color: red !important;\n  font-weight: 900;\n}", ""]);
+exports.push([module.i, "button {\n  width: 36px;\n}\n.rowHover {\n  transition: 0.3s;\n}\n.rowHover:hover {\n  cursor: pointer;\n  background: rgba(0, 195, 255, 0.151);\n}\n.sinGuardar {\n  color: red !important;\n  font-weight: 900;\n}\n.table-row-transition-move {\n  transition: all 0.8s;\n}", ""]);
 
 // exports
 
