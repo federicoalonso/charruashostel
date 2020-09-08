@@ -30,6 +30,7 @@ Vue.component('sidebar-menu', require('./components/layouts/SidebarMenu.vue').de
 Vue.component('modal-form', require('./components/modals/ModalForm.vue').default);
 Vue.component('toast-alert', require('./components/layouts/ToastAlert.vue').default);
 Vue.component('confirmation-alert', require('./components/layouts/ConfirmationAlert.vue').default);
+Vue.component('logout-button', require('./components/layouts/LogoutButton.vue').default);
 
 import auth from './mixins/auth';
 

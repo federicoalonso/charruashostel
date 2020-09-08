@@ -42,22 +42,7 @@
         </div>
       </li>
       <li class="separator"></li>
-      <li class="item">
-          <a href="#" class="menu-btn salirAlerta">
-          <i class="nav-icon fas fa-power-off"></i>
-          <span>Cerrar Sesión</span>
-        </a>
-        <!-- <a href="{{ route('logout') }}" class="menu-btn salirAlerta">
-          <i class="nav-icon fas fa-power-off"></i>
-          <span>Cerrar Sesión</span>
-        </a> -->
-        <!-- <form
-          id="logout-form"
-          action="{{ route('logout') }}"
-          method="POST"
-          style="display: none;"
-        >@csrf</form> -->
-      </li>
+      <logout-button></logout-button>
     </div>
   </div>
 </template>
