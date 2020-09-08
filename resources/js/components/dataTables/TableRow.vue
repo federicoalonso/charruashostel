@@ -13,9 +13,13 @@ button {
   color: red !important;
   font-weight: 900;
 }
+.table-row-transition-move{
+  transition: all 0.8s;
+}
 </style>
 <template>
-  <tr class="rowHover" v-bind:class="[this.updating ? 'sinGuardar' : '']">
+  <transition-group name="table-row-transition" tag="tr" class="rowHover" v-bind:class="[this.updating ? 'sinGuardar' : '']">
+  <!-- <tr class="rowHover" v-bind:class="[this.updating ? 'sinGuardar' : '']"> -->
     <td>{{ categoria.id }}</td>
     <td>{{ categoria.nombre }}</td>
     <td>{{ categoria.autor }}</td>
@@ -45,7 +49,8 @@ button {
         </button>
       </div>
     </td>
-  </tr>
+  <!-- </tr> -->
+  </transition-group>
 </template>
 <script>
 export default {
